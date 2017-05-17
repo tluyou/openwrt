@@ -33,6 +33,10 @@
 #define IWINFO_WL_META		"iwinfo.wl"
 #endif
 
+#ifdef USE_MTK
+#define IWINFO_MTK_META	"iwinfo.mtk"
+#endif
+
 #ifdef USE_MADWIFI
 #define IWINFO_MADWIFI_META	"iwinfo.madwifi"
 #endif

@@ -35,6 +35,9 @@ boot() {
 	grep -q debugfs /proc/filesystems && /bin/mount -o noatime -t debugfs debugfs /sys/kernel/debug
 	[ "$FAILSAFE" = "true" ] && touch /tmp/.failsafe
 
+    # Do wifi driver toggle
+    [ -e /usr/sbin/drivertoggle ] && /usr/sbin/drivertoggle start
+
 	/sbin/kmodloader
 
 	# allow wifi modules time to settle

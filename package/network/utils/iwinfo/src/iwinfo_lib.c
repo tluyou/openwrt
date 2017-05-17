@@ -321,6 +321,9 @@ static const struct iwinfo_ops *backends[] = {
 #ifdef USE_NL80211
 	&nl80211_ops,
 #endif
+#ifdef USE_MTK
+	&mtk_ops,
+#endif
 #ifdef USE_MADWIFI
 	&madwifi_ops,
 #endif

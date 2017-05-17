@@ -6,12 +6,12 @@
 
 logger "$BUTTON pressed for $SEEN seconds"
 
-if [ "$SEEN" -lt 1 ]
+if [ "$SEEN" -le 10 ] && [ "$SEEN" -gt 5 ]
 then
 	echo "REBOOT" > /dev/console
 	sync
 	reboot
-elif [ "$SEEN" -gt 5 ]
+elif [ "$SEEN" -gt 10 ]
 then
 	echo "FACTORY RESET" > /dev/console
 	jffs2reset -y && reboot &

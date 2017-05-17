@@ -15,6 +15,7 @@ PKG_CONFIG_DEPENDS := \
 	CONFIG_PACKAGE_kmod-brcm-wl-mini \
 	CONFIG_PACKAGE_kmod-brcm-wl-mimo \
 	CONFIG_PACKAGE_kmod-madwifi \
+	CONFIG_TARGET_ramips \
 	CONFIG_PACKAGE_kmod-mac80211
 
 include $(INCLUDE_DIR)/package.mk
@@ -31,7 +32,7 @@ endef
 
 define Package/libiwinfo/description
   Wireless information library with consistent interface for proprietary Broadcom,
-  madwifi, nl80211 and wext driver interfaces.
+  madwifi, mtk, nl80211 and wext driver interfaces.
 endef
 
 
@@ -76,6 +77,7 @@ IWINFO_BACKENDS := \
 	$(if $(CONFIG_PACKAGE_kmod-brcm-wl-mini),wl) \
 	$(if $(CONFIG_PACKAGE_kmod-brcm-wl-mimo),wl) \
 	$(if $(CONFIG_PACKAGE_kmod-madwifi),madwifi) \
+	$(if $(CONFIG_TARGET_ramips),mtk) \
 	$(if $(CONFIG_PACKAGE_kmod-mac80211),nl80211)
 
 TARGET_CFLAGS += \

@@ -667,6 +667,35 @@ LUA_WRAP_STRUCT_OP(madwifi,mbssid_support)
 LUA_WRAP_STRUCT_OP(madwifi,hardware_id)
 #endif
 
+#ifdef USE_MTK
+/* Mtk */
+LUA_WRAP_INT_OP(mtk,channel)
+LUA_WRAP_INT_OP(mtk,frequency)
+LUA_WRAP_INT_OP(mtk,frequency_offset)
+LUA_WRAP_INT_OP(mtk,txpower)
+LUA_WRAP_INT_OP(mtk,txpower_offset)
+LUA_WRAP_INT_OP(mtk,bitrate)
+LUA_WRAP_INT_OP(mtk,signal)
+LUA_WRAP_INT_OP(mtk,noise)
+LUA_WRAP_INT_OP(mtk,quality)
+LUA_WRAP_INT_OP(mtk,quality_max)
+LUA_WRAP_STRING_OP(mtk,ssid)
+LUA_WRAP_STRING_OP(mtk,bssid)
+LUA_WRAP_STRING_OP(mtk,country)
+LUA_WRAP_STRING_OP(mtk,hardware_name)
+LUA_WRAP_STRING_OP(mtk,phyname)
+LUA_WRAP_STRUCT_OP(mtk,mode)
+LUA_WRAP_STRUCT_OP(mtk,assoclist)
+LUA_WRAP_STRUCT_OP(mtk,txpwrlist)
+LUA_WRAP_STRUCT_OP(mtk,scanlist)
+LUA_WRAP_STRUCT_OP(mtk,freqlist)
+LUA_WRAP_STRUCT_OP(mtk,countrylist)
+LUA_WRAP_STRUCT_OP(mtk,hwmodelist)
+LUA_WRAP_STRUCT_OP(mtk,encryption)
+LUA_WRAP_STRUCT_OP(mtk,mbssid_support)
+LUA_WRAP_STRUCT_OP(mtk,hardware_id)
+#endif
+
 #ifdef USE_NL80211
 /* NL80211 */
 LUA_WRAP_INT_OP(nl80211,channel)
@@ -787,6 +816,39 @@ static const luaL_reg R_madwifi[] = {
 };
 #endif
 
+
+#ifdef USE_MTK
+/* Mtk table */
+static const luaL_reg R_mtk[] = {
+	LUA_REG(mtk,channel),
+	LUA_REG(mtk,frequency),
+	LUA_REG(mtk,frequency_offset),
+	LUA_REG(mtk,txpower),
+	LUA_REG(mtk,txpower_offset),
+	LUA_REG(mtk,bitrate),
+	LUA_REG(mtk,signal),
+	LUA_REG(mtk,noise),
+	LUA_REG(mtk,quality),
+	LUA_REG(mtk,quality_max),
+	LUA_REG(mtk,mode),
+	LUA_REG(mtk,ssid),
+	LUA_REG(mtk,bssid),
+	LUA_REG(mtk,country),
+	LUA_REG(mtk,assoclist),
+	LUA_REG(mtk,txpwrlist),
+	LUA_REG(mtk,scanlist),
+	LUA_REG(mtk,freqlist),
+	LUA_REG(mtk,countrylist),
+	LUA_REG(mtk,hwmodelist),
+	LUA_REG(mtk,encryption),
+	LUA_REG(mtk,mbssid_support),
+	LUA_REG(mtk,hardware_id),
+	LUA_REG(mtk,hardware_name),
+	LUA_REG(mtk,phyname),
+	{ NULL, NULL }
+};
+#endif
+
 #ifdef USE_NL80211
 /* NL80211 table */
 static const luaL_reg R_nl80211[] = {
@@ -876,6 +938,15 @@ LUALIB_API int luaopen_iwinfo(lua_State *L) {
 	lua_pushvalue(L, -1);
 	lua_setfield(L, -2, "__index");
 	lua_setfield(L, -2, "madwifi");
+#endif
+
+#ifdef USE_MTK
+	luaL_newmetatable(L, IWINFO_MTK_META);
+	luaL_register(L, NULL, R_common);
+	luaL_register(L, NULL, R_mtk);
+	lua_pushvalue(L, -1);
+	lua_setfield(L, -2, "__index");
+	lua_setfield(L, -2, "mtk");
 #endif
 
 #ifdef USE_NL80211
