@@ -13,6 +13,9 @@ ramips_board_detect() {
 	machine=$(awk 'BEGIN{FS="[ \t]+:[ \t]"} /machine/ {print $2}' /proc/cpuinfo)
 
 	case "$machine" in
+	*"TLUYOU-X1")
+		name="tluyou-x1"
+		;;
 	*"7Links PX-4885")
 		name="px4885"
 		;;

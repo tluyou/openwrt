@@ -11,6 +11,16 @@ set_wifi_led() {
 	ucidef_set_led_netdev "wifi_led" "wifi" "$1" "wlan0"
 }
 
+set_tluyou_wifi_led() {
+
+    local dev="ra0"
+    cat /proc/net/dev | grep wlan0 > /dev/null 2>&1
+    if [ $? -eq 0 ];then
+        dev="wlan0"
+    fi
+	ucidef_set_led_netdev "wifi_led" "wifi" "$1" "${dev}"
+}
+
 board=$(ramips_board_name)
 
 case $board in
@@ -209,6 +219,10 @@ case $board in
 		ucidef_set_led_default "power" "power" "lenovo:blue:power" "1"
 		set_usb_led "lenovo:blue:usb"
 		set_wifi_led "lenovo:blue:wifi"
+		;;
+	tluyou-x1)
+		ucidef_set_led_default "power" "power" "tluyou:green:status" "1"
+		set_tluyou_wifi_led "tluyou:blue:status"
 		;;
 esac
 

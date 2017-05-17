@@ -1,0 +1,35 @@
+/dts-v1/;
+
+/include/ "TLUYOU-X1.dtsi"
+
+/ {
+	compatible = "TLuYou,X1", "ralink,mt7620a-soc";
+	model = "TLUYOU-X1";
+
+	ethernet@10100000 {
+		pinctrl-names = "default";
+		pinctrl-0 = <&ephy_pins>;
+		mtd-mac-address = <&factory 0x4>;
+		ralink,port-map = "llllw";
+	};
+	
+	gpio-leds {
+		compatible = "gpio-leds";
+		red {
+			label = "tluyou:red:status";
+			gpios = <&gpio3 0 1>;
+		};
+		green {
+			label = "tluyou:green:status";
+			gpios = <&gpio0 22 1>;
+		};
+		blue {
+			label = "tluyou:blue:status";
+			gpios = <&gpio0 23 1>;
+		};
+		zigbee {
+			label = "tluyou:zigbee:power";
+			gpios = <&gpio0 14 0>;
+		};
+	};
+};
